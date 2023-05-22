@@ -1,12 +1,9 @@
-
-import tensorflow as tf
-
 from keras import backend
-from keras.layers import VersionAwareLayers
 from keras.engine import training
-
+from keras.layers import VersionAwareLayers
 
 layers = None
+
 
 def ResNet(input_shape, stack_fn, pooling='avg'):
     global layers
@@ -72,17 +69,15 @@ def stack1(x, filters, blocks, stride1=2, name=None):
     return x
 
 
-
 def ResNet_new(input_shape, pooling='avg'):
-
     def stack_fn(x):
         x = stack1(x, 64, 2, name="conv2")
-        #x = stack1(x, 128, 2, name="conv3")
+        # x = stack1(x, 128, 2, name="conv3")
         return x
 
     return ResNet(input_shape, stack_fn, pooling)
 
 
 if __name__ == "__main__":
-    model = ResNet_new((256,256,3))
+    model = ResNet_new((256, 256, 1))
     print(model.summary())
